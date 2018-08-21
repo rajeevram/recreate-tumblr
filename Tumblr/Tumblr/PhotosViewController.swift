@@ -60,24 +60,16 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhotoTableViewCell") as! PhotoTableViewCell
         cell.photoImageView.af_setImage(withURL: getPhotoURL(rowNumber: indexPath.row)!)
-//        let post = posts[indexPath.row]
-//        if let photos = post["photos"] as? [[String: Any]] {
-//            let photo = photos[0]
-//            let originalSize = photo["original_size"] as! [String: Any]
-//            let urlString = originalSize["url"] as! String
-//            let url = URL(string: urlString)
-//            cell.photoImageView.af_setImage(withURL: url!)
-//        }
         return cell
     }
     
-    func getPhotoString(rowNumber: Int) -> String? {
-        var description: String?
+    func getCaptionString(rowNumber: Int) -> String? {
+        var captionWithHTML: String?
         let post = posts[rowNumber]
         if let caption = post["caption"] as! String? {
-            description = caption
+            captionWithHTML = caption
         }
-        return description
+        return captionWithHTML
     }
     
     func getPhotoURL(rowNumber: Int) -> URL? {
@@ -98,7 +90,7 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         let indexPath = photoTableView.indexPath(for: cell)!
         let url = getPhotoURL(rowNumber: indexPath.row)
         detailView.photoURL = url
-        detailView.detailText = getPhotoString(rowNumber: indexPath.row)
+        detailView.detailText = getCaptionString(rowNumber: indexPath.row)
         photoTableView.deselectRow(at: indexPath, animated: true)
     }
     

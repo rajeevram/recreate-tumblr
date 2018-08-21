@@ -21,7 +21,8 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoImageView.af_setImage(withURL: photoURL!)
-        detailTextLabel.text = detailText!
+        //detailTextLabel.text = detailText!
+        detailTextLabel.attributedText = removeHTMLFromCaption(captionWithHTML: detailText!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,7 +30,21 @@ class DetailsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func removeHTMLFromCaption(captionWithHTML: String) -> NSAttributedString? {
+        var captionWithoutHTML: NSAttributedString?
+        if let data = captionWithHTML.data(using: .utf8) {
+            do {
+                captionWithoutHTML = try NSAttributedString(
+                    data: data,
+                    options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding:String.Encoding.utf8.rawValue],
+                    documentAttributes: nil)
+            }
+            catch {
+                print("Error parsing HTML caption!")
+            }
+        }
+        return captionWithoutHTML
+    }
     /*
     // MARK: - Navigation
 
