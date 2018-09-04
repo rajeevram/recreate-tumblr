@@ -21,8 +21,8 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoImageView.af_setImage(withURL: photoURL!)
-        //detailTextLabel.text = detailText!
         detailTextLabel.attributedText = removeHTMLFromCaption(captionWithHTML: detailText!)
+        detailTextLabel.font = UIFont(name: "HelveticaNeue", size: 12)
     }
 
     override func didReceiveMemoryWarning() {
