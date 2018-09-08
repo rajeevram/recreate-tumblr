@@ -23,7 +23,6 @@ class PhotosViewController: UIViewController, UITableViewDataSource, UITableView
         photoTableView.rowHeight = 250
         super.viewDidLoad()
         retrieveTumblrAPIData()
-        //print(1)
     }
     
     // Make a network request
